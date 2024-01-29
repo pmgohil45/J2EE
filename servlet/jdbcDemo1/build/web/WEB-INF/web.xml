@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>selectData</servlet-name>
+        <servlet-class>selectData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteData</servlet-name>
+        <servlet-class>deleteData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Deleteid</servlet-name>
+        <servlet-class>Deleteid</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateData</servlet-name>
+        <servlet-class>updateData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>selectData</servlet-name>
+        <url-pattern>/selectData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteData</servlet-name>
+        <url-pattern>/deleteData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Deleteid</servlet-name>
+        <url-pattern>/Deleteid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateData</servlet-name>
+        <url-pattern>/updateData</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

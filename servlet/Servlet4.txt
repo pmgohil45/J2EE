@@ -1,0 +1,74 @@
+index.html
+----------
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DropDownList Control</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form name="form1" action="/Example4/DropDownListDemo" target="output">
+                <b>Color:</b>
+		<select name=color size=1>
+                    <option value=Red>Red</option>
+                    <option value=Green>Green</option>
+                    <option value=Blue>Blue</option>
+		</select>
+		<input type=submit value="Submit">
+            </form>
+            <br>
+            <iframe name="output" width="200" height="200"></iframe>
+        </div>
+    </body>
+</html>
+---------------------------------------------------------------------
+DropDownListDemo.java
+----------------------
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class DropDownListDemo extends HttpServlet {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DropDownListDemo</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            String c=request.getParameter("color");          
+            out.print("<b>Selected Color= ");
+            out.println(c);
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+    
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

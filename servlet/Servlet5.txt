@@ -1,0 +1,50 @@
+index.html
+-----------
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Servlet Life Cycle</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form name="form1" action="/Example5/ServletLifeCycle" target="output">
+                <input type="submit" value="Submit">
+            </form>
+            <iframe name="output"></iframe>
+        </div>
+    </body>
+</html>
+-----------------------------------------------------------
+ServletLifeCycle.java
+----------------------
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+ 
+public class ServletLifeCycle extends GenericServlet {
+    private String str;
+    @Override
+    public void init() {
+        // initialize the servlet, and print something in the console.
+        str = "Servlet Called From HTML Page!";
+        System.out.println("Servlet Stared");
+    }
+    @Override
+    public void service(ServletRequest request, ServletResponse response)
+            throws ServletException, IOException {    
+        // the service method will 
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println(str);
+    }
+
+    @Override
+    public void destroy() {
+        System.out.print("Servlet Destoryed");
+    }
+}

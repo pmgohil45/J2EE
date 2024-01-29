@@ -1,0 +1,79 @@
+index.html
+----------
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Using Multiple Parameters</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="/MultiParam/Example3">
+                <table>
+                    <tr>
+                        <td>Enter Name:</td> <td><input type="text" name="txtName"></td>
+                    </tr>
+                    <tr>
+                        <td>Enter Phone: </td><td> <input type="text" name="txtPhone"></td>
+                    </tr>
+                </table>
+                <input type="Submit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>
+-------------------------------------------------------------
+Example3.java
+-------------
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+
+public class Example3 extends HttpServlet {
+
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Example3</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            Enumeration enu=request.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String pname=(String)enu.nextElement();
+			out.print("<br>"+pname+" = ");
+			String pvalue=request.getParameter(pname);
+			out.println(pvalue);
+		}
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+ 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
