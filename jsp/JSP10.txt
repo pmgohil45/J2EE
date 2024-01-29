@@ -1,0 +1,52 @@
+index.html
+----------
+<html>
+    <head>
+        <title>Error Handling</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="Errorhandler.jsp">
+                1st Number: <input type="text" name="fno">
+                2nd Number: <input type="text" name="sno">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>
+-------------------------------------------------------------------
+ErrorHandler.jsp
+----------------
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Errorhandler JSP Page</title>
+    </head>
+    <body>
+        <%
+            int fno, sno;
+            fno=Integer.parseInt(request.getParameter("fno"));
+            sno=Integer.parseInt(request.getParameter("sno"));
+            int div=fno/sno;
+        %>
+        <p>Division is: <%=div %></p>
+    </body>
+</html>
+-------------------------------------------------------------------
+error.jsp
+---------
+<%@page contentType="text/html" pageEncoding="UTF-8" isErrorPage="true"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Error JSP Page</title>
+    </head>
+    <body>
+        <font color="red"> <%=exception.toString() %> </font>
+    </body>
+</html>

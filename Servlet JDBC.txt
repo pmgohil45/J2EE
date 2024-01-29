@@ -1,0 +1,126 @@
+// Form
+			<form action="" method="get" target="output">
+				<table>
+					<tr>
+						<td>I'd : </td>
+						<td><input type="number" name="tid">
+					</tr>
+					<tr>
+						<td>Name : </td>
+						<td><input type="text" name="tname">
+					</tr>
+					<tr>
+						<td>City : </td>
+						<td><input type="text" name="tcity">
+					</tr>
+				</table>
+				<button formaction="/jdbcServlet/ins">Insert</button>
+				<button formaction="/jdbcServlet/selData">Select</button>
+				<button formaction="/jdbcServlet/upd">Update</button>
+			</form>
+			<iframe name="output"></iframe>
+		
+// add the imprt java.sql.*;
+
+// Insert
+			out.println("<body>");
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con=DriverManager.getConnection("jdbc:mysql://localhost/prakash","root","");
+                Statement st=con.createStatement();
+                String i,n,c;
+                i=request.getParameter("tid");
+                n=request.getParameter("tname");
+                c=request.getParameter("tcity");
+                String ins="insert into data values('"+i+"','"+n+"','"+c+"')";
+                st.executeUpdate(ins);
+                out.println("Record Inserted");
+                st.close();
+                con.close();
+                
+            }catch(Exception e){e.printStackTrace();}
+            out.println("</body>");
+
+// Select
+			out.println("<body>");
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con=DriverManager.getConnection("jdbc:mysql://localhost/prakash","root","");
+                Statement st=con.createStatement();
+                String sel="select * from data";
+                ResultSet rs = st.executeQuery(sel);
+                out.println("<table border='1'><tr><td>I'd</td><td>Name</td><td>City</td><td>Update</td><td>Delete</td></tr>");
+                while(rs.next()){
+                    int i;
+                    String n,c;
+                    i=rs.getInt("id");
+                    n=rs.getString("name");
+                    c=rs.getString("city");
+                    out.println("<tr><td>"+i+"</td><td>"+n+"</td><td>"+c+"</td><td><a href='/jdbcServlet/upd?id="+i+"'>Update</a></td><td><a href='/jdbcServlet/del?id="+i+"'>Delete</a></td></tr>");
+                }
+                out.println("</table>");
+                rs.close();
+                st.close();
+                con.close();
+            }catch(Exception e){e.printStackTrace();}
+            out.println("</body>");
+			
+// Update
+			out.println("<body>");
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/prakash","root","");
+                Statement st = con.createStatement();
+                String i1,n1,c1;
+                i1 = request.getParameter("tid");
+                n1 = request.getParameter("tname");
+                c1 = request.getParameter("tcity");
+                String up = "update data set name='"+n1+"',city='"+c1+"' where id='"+i1+"'";
+                st.executeUpdate(up);
+                out.println("I'd "+i1+" Updated..");
+                
+                String sel="select * from data";
+                ResultSet rs = st.executeQuery(sel);
+                out.println("<table border='1'><tr><td>I'd</td><td>Name</td><td>City</td><td>Update</td><td>Delete</td></tr>");
+                while(rs.next()){
+                    int i;
+                    String n,c;
+                    i=rs.getInt("id");
+                    n=rs.getString("name");
+                    c=rs.getString("city");
+                    out.println("<tr><td>"+i+"</td><td>"+n+"</td><td>"+c+"</td><td><a href='/jdbcServlet/upd'>Update</a></td><td><a href='/jdbcServlet/del'>Delete</a></td></tr>");
+                }
+                out.println("</table>");
+                st.close();
+                con.close();
+            }catch(Exception e){e.printStackTrace();}
+            out.println("</body>");
+			
+// Delete 
+			out.println("<body>");
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/prakash","root","");
+                Statement st = con.createStatement();
+                String i = request.getParameter("id");
+                String del = "delete from data where id='"+i+"'";
+                st.executeUpdate(del);
+                out.println("I'd "+i+" Deleted...");
+                
+                String sel="select * from data";
+                ResultSet rs = st.executeQuery(sel);
+                out.println("<table border='1'><tr><td>I'd</td><td>Name</td><td>City</td><td>Update</td><td>Delete</td></tr>");
+                while(rs.next()){
+                    int i1;
+                    String n,c;
+                    i1=rs.getInt("id");
+                    n=rs.getString("name");
+                    c=rs.getString("city");
+                    out.println("<tr><td>"+i1+"</td><td>"+n+"</td><td>"+c+"</td><td><a href='/jdbcServlet/upd?id="+i1+"'>Update</a></td><td><a href='/jdbcServlet/del?id="+i1+"'>Delete</a></td></tr>");
+                }
+                out.println("</table>");
+                st.close();
+                con.close();
+                
+            }catch(Exception e){e.printStackTrace();}
+            out.println("</body>");

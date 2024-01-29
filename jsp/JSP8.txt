@@ -1,0 +1,53 @@
+index.html
+----------
+<html>
+    <head>
+        <title>Cookies Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form name="from" target="output">
+                Enter text :<input type="text" name="txtValue"><br>
+                <button type="submit" formaction="/JSPExample8/StoreValue.jsp">Store</button>
+                <button type="submit" formaction="/JSPExample8/RestoreValue.jsp">Restore</button>
+            </form>
+        </div>
+        <iframe name="output"></iframe>
+    </body>
+</html>
+----------------------------------------------------------------------
+StoreValue.jsp
+---------------
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Store Value JSP Page</title>
+    </head>
+    <body>
+        <%
+            String s = request.getParameter("txtValue");
+            Cookie ck = new Cookie("uname",s);
+            response.addCookie(ck);
+            out.print("Value Stored");
+        %>
+    </body>
+</html>
+----------------------------------------------------------------------
+RestoreValue.jsp
+----------------
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Restore Value JSP Page</title>
+    </head>
+    <body>
+        <%
+            Cookie ck[] = request.getCookies();
+            out.print("Hello <b>"+ck[0].getValue());
+        %>
+    </body>
+</html>

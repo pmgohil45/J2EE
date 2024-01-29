@@ -1,0 +1,166 @@
+index.html
+----------
+<html>
+    <head>
+        <title>JDBC with JSP</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form name="form1" target="output">
+                <table>
+                    <tr>
+                        <td>Enter Rlno:</td><td><input type="text" name="txtRlno"></td>
+                    </tr>
+                    <tr>
+                        <td>Enter Name:</td><td><input type="text" name="txtName"></td>
+                    </tr>
+                    <tr>
+                        <td>Enter City: </td><td><input type="text" name="txtCity"></td>
+                    </tr>
+                </table>
+                <button type="submit"  formaction="/JSPExample11/InsertData.jsp">Insert</button>
+                <button type="submit" formaction="/JSPExample11/UpdateData.jsp">Update</button>
+                <button type="submit" formaction="/JSPExample11/DeleteData.jsp">Delete</button>
+                <button type="submit" formaction="/JSPExample11/ViewData.jsp">View</button>
+            </form>
+        </div>
+        <iframe name="output"></iframe>
+    </body>
+</html>
+-------------------------------------------------------------------
+insertdata.jsp
+--------------
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Insert Record</title>
+    </head>
+    <body>
+        <%
+             try{
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con=DriverManager.getConnection("jdbc:mysql://localhost/College", "root", "");
+                Statement st=con.createStatement();
+                String r,s,c;
+                r=request.getParameter("txtRlno");
+                s=request.getParameter("txtName");
+                c=request.getParameter("txtCity");
+                String qry="Insert into student values("+r+",'"+s+"','"+c+"')";
+                int rows = st.executeUpdate(qry);
+                out.println(rows+ "<b> Record(s) Inserted</b><br>");
+                st.close();
+                con.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            } 
+        %>
+    </body>
+</html>
+-------------------------------------------------------------
+UpdateData.jsp
+--------------
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Update Record</title>
+    </head>
+    <body>
+        <%
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con=DriverManager.getConnection("jdbc:mysql://localhost/College", "root", "");
+                Statement st=con.createStatement();
+                String r,s,c;
+                r=request.getParameter("txtRlno");
+                s=request.getParameter("txtName");
+                c=request.getParameter("txtCity");
+                String qry="Update student set sname='"+s+"', city='"+c+"' where rlno="+r;
+                //out.print(qry);
+                int rows = st.executeUpdate(qry);
+                out.println(rows+ "<b> Record(s) Updated</b><br>");
+                st.close();
+                con.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        %>
+        
+    </body>
+</html>
+-----------------------------------------------------------
+deletedata.jsp
+--------------
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Delete Record</title>
+    </head>
+    <body>
+        <%
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con=DriverManager.getConnection("jdbc:mysql://localhost/College", "root", "");
+                Statement st=con.createStatement();
+                String r;
+                r=request.getParameter("txtRlno");
+                String qry="Delete from student where rlno="+r;
+                int rows = st.executeUpdate(qry);
+                out.println(rows+ "<b> Record(s) Deletede</b>");
+                st.close();
+                con.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            } 
+        %>
+        
+    </body>
+</html>
+--------------------------------------------------------------------
+viewdata.jsp
+------------
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>View Record</title>
+    </head>
+    <body>
+        <%
+             try{
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con=DriverManager.getConnection("jdbc:mysql://localhost/College", "root", "");
+                Statement st=con.createStatement();
+                String qry="select * from student";
+                ResultSet rs = st.executeQuery(qry);
+                out.println("<table border=1>");
+                out.println("<thead><b>Student's List</b></thead>");
+                out.println("<tr>");
+                out.println("<th>Rlno<th>Name<th>City</tr>");
+                while(rs.next()){
+                    int r;
+                    String s,c;
+                    r=rs.getInt("rlno");
+                    s=rs.getString("sname");
+                    c=rs.getString("city");
+                    out.println("<tr>");
+                    out.println("<td>"+r+"<td>"+s+"<td>"+c+"</tr>");
+                }
+                out.println("</table>");
+                rs.close();
+                st.close();
+                con.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        %>
+    </body>
+</html>

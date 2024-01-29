@@ -1,0 +1,38 @@
+index.html
+----------
+<html>
+    <head>
+        <title>Scripting Elements</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="ScriptingElements.jsp">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>
+------------------------------------------------------------------
+ScriptingElements.jsp
+---------------------
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Scripting Elements</title>
+    </head>
+    <body>
+        <%! int i=0; %> <%-- Delclaration Scripting Element --%>
+        
+        <%-- Scriptlet Scripting Element --%>
+        <% 
+            i++;
+            out.print("Value of i: <b>"+i);
+        %>
+        <br>
+        <b> Today's Date is: <%=new java.util.Date()%> <%-- Expression Scripting Elements --%>
+    </body>
+</html>

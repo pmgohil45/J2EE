@@ -1,0 +1,61 @@
+index.html
+----------
+<html>
+    <head>
+        <title>Include Directive Example</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="IncludeDemo.jsp">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>
+---------------------------------------------------------------
+IncludeDemo.jsp
+---------------
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Include Directdives</title>
+    </head>
+    <body>
+        <%@include file="Header.jsp" %>
+        <%
+            out.print("<h1>Hello World!</h1>");
+         %>
+         <%@include file="Footer.jsp" %>
+    </body>
+</html>
+--------------------------------------------------------------------
+Header.jsp
+----------
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <center><h1>The Header</h1></center>
+    </body>
+</html>
+---------------------------------------------------------------------
+Footer.jsp
+----------
+<html>
+    <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <center><h2>The footer</h2></center>
+    </body>
+</html>

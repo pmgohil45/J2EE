@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JDBC Servlet</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="" method="get" target="output">
+            <table>
+                <tr>
+                    <td>I'd : </td>
+                    <td><input type="number" name="tid">
+                </tr>
+                <tr>
+                    <td>Name : </td>
+                    <td><input type="text" name="tname">
+                </tr>
+                <tr>
+                    <td>City : </td>
+                    <td><input type="text" name="tcity">
+                </tr>
+            </table>
+            <button formaction="/jdbcServlet/ins">Insert</button>
+            <button formaction="/jdbcServlet/selData">Select</button>
+            <button formaction="/jdbcServlet/upd">Update</button>
+            <button formaction="/jdbcServlet/del">Delete</button>
+        </form>
+        <iframe name="output"></iframe>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+index.html
+----------
+<html>
+    <head>
+        <title>Include Action Element</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="IncludeDate.jsp" >
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>
+----------------------------------------------------------
+IncludeDate.jsp
+---------------
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Include Date JSP</title>
+    </head>
+    <body>
+        <u><h1 align="center">Include Demo</h1></u>
+        <jsp:include page="Date.jsp" flush="true"/>
+    </body>
+</html>
+-----------------------------------------------------------
+Date.jsp
+--------
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Date JSP</title>
+    </head>
+    <body>
+        <h2>This code include form Date.jsp file</h2>
+        <% java.util.Date now = new java.util.Date(); %>
+        <h3><%= now.toString()%></h3>
+    </body>
+</html>

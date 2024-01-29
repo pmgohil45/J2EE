@@ -1,0 +1,25 @@
+//JSP LifeCycle
+<html>
+    <head>
+        <title> JSP life cycle demonstration </title>
+    </head>
+    <body>
+	<%!
+		int visitorCounter ;
+		public void jspInit()
+		{
+			visitorCounter=0;
+		}
+		public void jspDestroy()
+		{
+			visitorCounter=0;
+		}
+	%>
+	<%
+		visitorCounter++;
+	%>
+        <strong>
+		Thanks for visiting the page. You are <%=visitorCounter %> visitor of the page.
+        </strong>
+    </body>
+</html>
